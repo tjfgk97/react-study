@@ -53,7 +53,7 @@ const App = () => {
       </div>
 
       <div className="list">
-        <h4 onClick={()=> {setModal(!modal)}}>{글제목[2]}</h4>
+        <h4 onClick={()=> { modal == true ? setModal(false) : setModal(true)}}>{글제목[2]}</h4>
         <p>2월 19일 발행</p>
         <hr />
       </div>
