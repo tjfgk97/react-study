@@ -8,7 +8,8 @@ const App = () => {
   //    [state 데이터, state 데이터 변경 함수]
   let [글제목, 글제목변경] = useState(['여자 코트 추천', '아동 코트 추천', '어른 코트 추천']);
   let [따봉, 따봉변경] = useState(0);
-  let posts = '강남 고기 맛집';
+
+  let [modal, setModal] = useState(false);
 
 // Array, Object state 데이터 수정방법 -> 변경함수를 사용해야 한다./ - 변경함수(대체할 데이터)
 // state는 건들지 말 것. deep copy 해서 그걸 건들도록.
@@ -37,7 +38,7 @@ const App = () => {
         <div>개발 Blog</div>
       </div>
 
-    <button onClick={ 순서바꾸기 }>버튼</button>
+    <button onClick={ 순서바꾸기 }>글정렬</button>
 
       <div className="list">
         <h4>{글제목[0]} <span onClick={ () => { 따봉변경(따봉 + 1) } }>👍🏻</span> {따봉} </h4>
@@ -57,7 +58,12 @@ const App = () => {
         <hr />
       </div>
 
-    <Modal></Modal>
+    {
+      // 조건식을 사용하고자 할 때는 아래처럼 삼항 연산자를 이용할 것.
+      // 조건식 ? 참일 때 실행할 코드 : 거짓일 때 실행할 코드
+
+      modal == true ? <Modal /> : null
+    }
 
     </div>
   );
