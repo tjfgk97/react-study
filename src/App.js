@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Component, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { renderHook } from '@testing-library/react';
@@ -70,7 +70,7 @@ function Modal(){
       <p>날짜</p>
       <p>상세내용</p>
     </div>
-    
+
     // Component 만드는 법
     // 1. 함수 만들고 이름 짓고
     // 2. 축약을 원하는 HTML 넣고
@@ -80,6 +80,15 @@ function Modal(){
     // 1. 이름은 대문자로 시작
     // 2. return() 안에 있는 건 태그 하나로 묶어야 한다.
     // 3. function App() 밖에 만들 것.
+
+    // 어떤 걸 Component로 만드느냐
+    // - 반복해서 나오는 HTML 덩어리들
+    // - 자주 변경되는 HTML UI들
+    // - 다른 페이지 만들 때도 컴포넌트로 만듦
+
+    // Component 많이 만들 경우 단점
+    // - state 쓸 때 복잡해짐
+    // (상위 Component에서 만든 state 쓰렴련 props 문법 이용해야 한다.)
   )
 };
 
