@@ -53,7 +53,7 @@ const App = () => {
       </div>
 
       <div className="list">
-        <h4 onClick={()=> {setModal(true)}}>{글제목[2]}</h4>
+        <h4 onClick={()=> {setModal(!modal)}}>{글제목[2]}</h4>
         <p>2월 19일 발행</p>
         <hr />
       </div>
@@ -63,6 +63,12 @@ const App = () => {
       // 조건식 ? 참일 때 실행할 코드 : 거짓일 때 실행할 코드
 
       modal == true ? <Modal /> : null
+
+      // [동적인 UI 만드는 step]
+      // 1. html css로 미리 디자인 완성
+      // 2. UI의 현재 상태를 state로 저장
+      // 3. state에 따라 UI가 어떻게 보일지 작성
+
     }
 
     </div>
