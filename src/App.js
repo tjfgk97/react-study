@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { renderHook } from '@testing-library/react';
 
 const App = () => {
 
@@ -55,9 +56,31 @@ const App = () => {
         <p>2월 19일 발행</p>
         <hr />
       </div>
+
+    <Modal></Modal>
+
     </div>
   );
 };
 
+function Modal(){
+  return (
+    <div className="modal">
+      <h2>제목</h2>
+      <p>날짜</p>
+      <p>상세내용</p>
+    </div>
+    
+    // Component 만드는 법
+    // 1. 함수 만들고 이름 짓고
+    // 2. 축약을 원하는 HTML 넣고
+    // 3. 원하는 곳에서 <함수명 />
+
+    // Component 유의사항
+    // 1. 이름은 대문자로 시작
+    // 2. return() 안에 있는 건 태그 하나로 묶어야 한다.
+    // 3. function App() 밖에 만들 것.
+  )
+};
 
 export default App;
