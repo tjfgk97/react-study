@@ -7,14 +7,14 @@ const App = () => {
 
   //    [state 데이터, state 데이터 변경 함수]
   let [글제목, 글제목변경] = useState(['여자 코트 추천', '아동 코트 추천', '어른 코트 추천']);
-  let [따봉, 따봉변경] = useState(0);
+  let [따봉, 따봉변경] = useState([0,0,0]);
 
   let [modal, setModal] = useState(false);
 
-// Array, Object state 데이터 수정방법 -> 변경함수를 사용해야 한다./ - 변경함수(대체할 데이터)
-// state는 건들지 말 것. deep copy 해서 그걸 건들도록.
+  // Array, Object state 데이터 수정방법 -> 변경함수를 사용해야 한다./ - 변경함수(대체할 데이터)
+  // state는 건들지 말 것. deep copy 해서 그걸 건들도록.
 
-  function 제목바꾸기(){
+  function 제목바꾸기() {
     // var newArray = 글제목; 이건 복사가 아니라 값을 공유하는 것이다. reference data type 검색.
     var newArray = [...글제목]; //deep copy 방법(...)
     newArray[0] = '여자 코트 추천';
@@ -26,7 +26,7 @@ const App = () => {
 
   };
 
-  function 순서바꾸기(){
+  function 순서바꾸기() {
     var newOrder = [...글제목];
     newOrder.sort();
     글제목변경(newOrder);
@@ -38,9 +38,9 @@ const App = () => {
         <div>개발 Blog</div>
       </div>
 
-    <button onClick={ 순서바꾸기 }>글정렬</button>
+      <button onClick={순서바꾸기}>글정렬</button>
 
-      <div className="list">
+      {/* <div className="list">
         <h4>{글제목[0]} <span onClick={ () => { 따봉변경(따봉 + 1) } }>👍🏻</span> {따봉} </h4>
         <p>2월 17일 발행</p>
         <hr />
@@ -50,32 +50,54 @@ const App = () => {
         <h4>{글제목[1]}</h4>
         <p>2월 18일 발행</p>
         <hr />
-      </div>
+      </div> */}
 
-      <div className="list">
+      {
+        글제목.map(function (a, i) {
+          return <div className="list" key={i}>
+            <h4 onClick={() => setModal(!modal)}>{글제목[i]}
+              <span onClick={() => {
+                let copy = [...따봉];
+                console.log(typeof copy);
+                copy[i] = copy[i] + 1;
+                따봉변경(copy)
+                
+                
+              }}> 👍🏻</span> {따봉[i]} </h4>
+            <p>2월 18일 발행</p>
+            <hr />
+          </div>
+
+          // map() 함수
+          // 1. 왼쪽 array 자료만큼 내부 코드 실행해줌
+          // 2. return 오른쪽에 있는 걸 array로 담아줌
+          // 3. 유용한 파라미터 2개 사용 가능
+        })
+      }
+
+      {/* <div className="list">
         <h4 onClick={()=> { modal == true ? setModal(false) : setModal(true)}}>{글제목[2]}</h4>
         <p>2월 19일 발행</p>
         <hr />
-      </div>
+      </div> */}
 
-    {
-      // 조건식을 사용하고자 할 때는 아래처럼 삼항 연산자를 이용할 것.
-      // 조건식 ? 참일 때 실행할 코드 : 거짓일 때 실행할 코드
+      {
+        // 조건식을 사용하고자 할 때는 아래처럼 삼항 연산자를 이용할 것.
+        // 조건식 ? 참일 때 실행할 코드 : 거짓일 때 실행할 코드
 
-      modal == true ? <Modal /> : null
+        modal == true ? <Modal /> : null
 
-      // [동적인 UI 만드는 step]
-      // 1. html css로 미리 디자인 완성
-      // 2. UI의 현재 상태를 state로 저장
-      // 3. state에 따라 UI가 어떻게 보일지 작성
+        // [동적인 UI 만드는 step]
+        // 1. html css로 미리 디자인 완성
+        // 2. UI의 현재 상태를 state로 저장
+        // 3. state에 따라 UI가 어떻게 보일지 작성
 
-    }
-
+      }
     </div>
   );
 };
 
-function Modal(){
+function Modal() {
   return (
     <div className="modal">
       <h2>제목</h2>
