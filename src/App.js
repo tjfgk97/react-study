@@ -53,7 +53,7 @@ const App = () => {
       </div>
 
       <div className="list">
-        <h4>{글제목[2]}</h4>
+        <h4 onClick={()=> {setModal(true)}}>{글제목[2]}</h4>
         <p>2월 19일 발행</p>
         <hr />
       </div>
