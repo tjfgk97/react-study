@@ -7,9 +7,10 @@ const App = () => {
 
   //    [state 데이터, state 데이터 변경 함수]
   let [글제목, 글제목변경] = useState(['여자 코트 추천', '아동 코트 추천', '어른 코트 추천']);
-  let [따봉, 따봉변경] = useState([0,0,0]);
+  let [따봉, 따봉변경] = useState(0);
 
   let [modal, setModal] = useState(false);
+  let [title, setTitle] = useState(0);
 
   // Array, Object state 데이터 수정방법 -> 변경함수를 사용해야 한다./ - 변경함수(대체할 데이터)
   // state는 건들지 말 것. deep copy 해서 그걸 건들도록.
@@ -55,15 +56,12 @@ const App = () => {
       {
         글제목.map(function (a, i) {
           return <div className="list" key={i}>
-            <h4 onClick={() => setModal(!modal)}>{글제목[i]}
+            <h4 onClick={() => {setModal(!modal); setTitle(i)}}>{글제목[i]}</h4>
               <span onClick={() => {
                 let copy = [...따봉];
-                console.log(typeof copy);
                 copy[i] = copy[i] + 1;
                 따봉변경(copy)
-                
-                
-              }}> 👍🏻</span> {따봉[i]} </h4>
+              }}> 👍🏻</span> {따봉[i]} 
             <p>2월 18일 발행</p>
             <hr />
           </div>
@@ -75,6 +73,10 @@ const App = () => {
         })
       }
 
+      <button onClick={ ()=> { setTitle(0) }}>글제목0</button>
+      <button onClick={ ()=> { setTitle(1) }}>글제목1</button>
+      <button onClick={ ()=> { setTitle(2) }}>글제목2</button>
+
       {/* <div className="list">
         <h4 onClick={()=> { modal == true ? setModal(false) : setModal(true)}}>{글제목[2]}</h4>
         <p>2월 19일 발행</p>
@@ -85,24 +87,33 @@ const App = () => {
         // 조건식을 사용하고자 할 때는 아래처럼 삼항 연산자를 이용할 것.
         // 조건식 ? 참일 때 실행할 코드 : 거짓일 때 실행할 코드
 
-        modal == true ? <Modal /> : null
+        modal == true ? <Modal title={title} 글제목변경={글제목변경} 글제목={글제목}/> : null
 
         // [동적인 UI 만드는 step]
         // 1. html css로 미리 디자인 완성
         // 2. UI의 현재 상태를 state로 저장
         // 3. state에 따라 UI가 어떻게 보일지 작성
 
+        // 부모 -> 자식 state 전송하려면 props 문법 사용
+        // 1. <자식 컴포넌트 작명 = {state이름}>
+        // 2. props 파라미터 등록 후 props.작명 사용
       }
     </div>
   );
 };
 
-function Modal() {
+function Modal(props, i) {
   return (
     <div className="modal">
-      <h2>제목</h2>
+      <h2>{props.글제목[props.title]}</h2>
       <p>날짜</p>
       <p>상세내용</p>
+      <button onClick={ () => { 
+        
+        let newTitle = [...props.글제목];
+        newTitle[0] = '남자 코트 추천';
+        props.글제목변경(newTitle) 
+        } }>글수정</button>
     </div>
 
     // Component 만드는 법
