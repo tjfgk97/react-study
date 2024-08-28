@@ -7,7 +7,7 @@ const App = () => {
 
   //    [state 데이터, state 데이터 변경 함수]
   let [글제목, 글제목변경] = useState(['여자 코트 추천', '아동 코트 추천', '어른 코트 추천']);
-  let [따봉, 따봉변경] = useState(0);
+  let [따봉, 따봉변경] = useState([0, 0, 0]);
 
   let [modal, setModal] = useState(false);
   let [title, setTitle] = useState(0);
@@ -31,8 +31,6 @@ const App = () => {
         <div>개발 Blog</div>
       </div>
 
-      <button onClick={순서바꾸기}>글정렬</button>
-
       {/* <div className="list">
         <h4>{글제목[0]} <span onClick={ () => { 따봉변경(따봉 + 1) } }>👍🏻</span> {따봉} </h4>
         <p>2월 17일 발행</p>
@@ -48,28 +46,20 @@ const App = () => {
       {
         글제목.map(function (a, i) {
           return <div className="list" key={i}>
-            <h4 onClick={() => {setModal(!modal); setTitle(i)}}>{글제목[i]}</h4>
+            <h4 onClick={() => {setModal(!modal); setTitle(i)}}>{글제목[i]}
               <span onClick={() => {
                 let copy = [...따봉];
                 copy[i] = copy[i] + 1;
                 따봉변경(copy)
-              }}> 👍🏻</span> {따봉[i]} 
+              }}> 👍🏻</span> {따봉[i]} </h4>
             <p>2월 18일 발행</p>
             <hr />
           </div>
         })
       }
 
-      <button onClick={ ()=> { setTitle(0) }}>글제목0</button>
-      <button onClick={ ()=> { setTitle(1) }}>글제목1</button>
-      <button onClick={ ()=> { setTitle(2) }}>글제목2</button>
-
-      {/* <div className="list">
-        <h4 onClick={()=> { modal == true ? setModal(false) : setModal(true)}}>{글제목[2]}</h4>
-        <p>2월 19일 발행</p>
-        <hr />
-      </div> */}
-
+    <input onChange={ ()=>{  }}></input>
+    
       {
         modal == true ? <Modal title={title} 글제목변경={글제목변경} 글제목={글제목}/> : null
       }
