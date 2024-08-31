@@ -11,6 +11,7 @@ const App = () => {
 
   let [modal, setModal] = useState(false);
   let [title, setTitle] = useState(0);
+  let [입력값, 입력값변경] = useState('');
 
   function 제목바꾸기() {
     var newArray = [...글제목]; //deep copy 방법(...)
@@ -46,8 +47,9 @@ const App = () => {
       {
         글제목.map(function (a, i) {
           return <div className="list" key={i}>
-            <h4 onClick={() => {setModal(!modal); setTitle(i)}}>{글제목[i]}
-              <span onClick={() => {
+            <h4 onClick={() => { setModal(!modal); setTitle(i) }}>{글제목[i]}
+              <span onClick={(e) => {
+                e.stopPropagation()
                 let copy = [...따봉];
                 copy[i] = copy[i] + 1;
                 따봉변경(copy)
@@ -58,10 +60,13 @@ const App = () => {
         })
       }
 
-    <input onChange={ ()=>{  }}></input>
-    
+      <input onChange={(e) => {           {/*state 변경함수는 늦게 처리된다.*/}
+        입력값변경(e.target.value);          {/*<- 이 줄이 완료되기 전에*/}
+        console.log(입력값);                {/*<-이 줄을 실행해준다.*/}
+      }} /> {/* on어쩌구 = 이벤트핸들러 */}     
+
       {
-        modal == true ? <Modal title={title} 글제목변경={글제목변경} 글제목={글제목}/> : null
+        modal == true ? <Modal title={title} 글제목변경={글제목변경} 글제목={글제목} /> : null
       }
     </div>
   );
@@ -73,12 +78,12 @@ function Modal(props, i) {
       <h2>{props.글제목[props.title]}</h2>
       <p>날짜</p>
       <p>상세내용</p>
-      <button onClick={ () => { 
-        
+      <button onClick={() => {
+
         let newTitle = [...props.글제목];
         newTitle[0] = '남자 코트 추천';
-        props.글제목변경(newTitle) 
-        } }>글수정</button>
+        props.글제목변경(newTitle)
+      }}>글수정</button>
     </div>
   )
 };
