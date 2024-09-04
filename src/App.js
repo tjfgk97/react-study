@@ -63,7 +63,16 @@ const App = () => {
       <input onChange={(e) => {           {/*state 변경함수는 늦게 처리된다.*/}
         입력값변경(e.target.value);          {/*<- 이 줄이 완료되기 전에*/}
         console.log(입력값);                {/*<-이 줄을 실행해준다.*/}
-      }} /> {/* on어쩌구 = 이벤트핸들러 */}     
+      }} /> {/* on어쩌구 = 이벤트핸들러 */}  
+
+      <button onClick={ (e)=> {
+        e.stopPropagation();
+        let copy = [...글제목];
+        copy.unshift(입력값);
+        글제목변경(copy);
+        console.log(copy);
+        
+        }} >글쓰기</button>
 
       {
         modal == true ? <Modal title={title} 글제목변경={글제목변경} 글제목={글제목} /> : null
