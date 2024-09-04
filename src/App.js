@@ -69,9 +69,13 @@ const App = () => {
         e.stopPropagation();
         let copy = [...글제목];
         copy.unshift(입력값);
-        글제목변경(copy);
-        console.log(copy);
         
+        let likes = [...따봉];
+        likes.unshift(0);
+        
+        글제목변경(copy);
+        따봉변경(likes);
+
         }} >글쓰기</button>
 
       {
