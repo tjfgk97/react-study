@@ -49,34 +49,41 @@ const App = () => {
           return <div className="list" key={i}>
             <h4 onClick={() => { setModal(!modal); setTitle(i) }}>{글제목[i]}
               <span onClick={(e) => {
-                e.stopPropagation()
+                e.stopPropagation();
                 let copy = [...따봉];
                 copy[i] = copy[i] + 1;
                 따봉변경(copy)
-              }}> 👍🏻</span> {따봉[i]} </h4>
+              }}> 👍🏻</span> {따봉[i]} &nbsp;
+              <button onClick={(e) => {
+                e.stopPropagation();
+                let remove = [...글제목];
+                remove.splice(i, 1);
+                글제목변경(remove);
+              }}>글삭제</button> </h4>
             <p>2월 18일 발행</p>
             <hr />
           </div>
         })
       }
 
-      <input onChange={(e) => {           {/*state 변경함수는 늦게 처리된다.*/}
-        입력값변경(e.target.value);          {/*<- 이 줄이 완료되기 전에*/}
-        console.log(입력값);                {/*<-이 줄을 실행해준다.*/}
-      }} /> {/* on어쩌구 = 이벤트핸들러 */}  
+      <input onChange={(e) => {
+        {/*state 변경함수는 늦게 처리된다.*/ }
+        입력값변경(e.target.value); {/*<- 이 줄이 완료되기 전에*/ }
+        console.log(입력값); {/*<-이 줄을 실행해준다.*/ }
+      }} /> {/* on어쩌구 = 이벤트핸들러 */}
 
-      <button onClick={ (e)=> {
+      <button onClick={(e) => {
         e.stopPropagation();
         let copy = [...글제목];
         copy.unshift(입력값);
-        
+
         let likes = [...따봉];
         likes.unshift(0);
-        
+
         글제목변경(copy);
         따봉변경(likes);
 
-        }} >글쓰기</button>
+      }} >글쓰기</button>
 
       {
         modal == true ? <Modal title={title} 글제목변경={글제목변경} 글제목={글제목} /> : null
